@@ -1,64 +1,47 @@
 package LinkedListProblem;
 
 public class Linkedlist {
-    static Node head;
-
     static class Node {
         int data;
         Node next;
 
-        Node(int d) {
-            data = d;
-            next = null;
+        Node(int data, Node next) {
+            this.data = data;
+            this.next = next;
         }
     }
 
 
-    static void insertAtMid(int x) {
-
-        if (head == null)
-            head = new Node(x);
-        else {
-
-            Node newNode = new Node(x);
-
-            Node ptr = head;
-            int len = 0;
-
-            while (ptr != null) {
-                len++;
-                ptr = ptr.next;
-            }
-            int count = ((len % 2) == 0) ? (len / 2) : (len + 1) / 2;
-            ptr = head;
-            while (count-- > 1)
-                ptr = ptr.next;
-
-            newNode.next = ptr.next;
-            ptr.next = newNode;
-        }
-    }
-
-    static void display() {
+    static void display(Node head) {
         Node temp = head;
         while (temp != null) {
             System.out.println(temp.data + " ");
             temp = temp.next;
         }
+        System.out.println("null");
+    }
+
+    public static Node pop(Node headRef) {
+        if (headRef == null) {
+            return null;
+        }
+        int result = headRef.data;
+        headRef = headRef.next;
+        System.out.println("the popped node is " + result);
+        return headRef;
     }
 
     public static void main(String[] args) {
 
-        head = new Node(56);
-        head.next = new Node(70);
+        int[] keys = {56, 30, 70};
 
-        System.out.println("linked list before insertion:");
-        display();
+        Node head = null;
 
-        int x = 30;
-        insertAtMid(x);
-        System.out.println("linked list after insertion:");
-        display();
+        for (int i = keys.length - 1; i >= 0; i--) {
+            head = new Node(keys[i], head);
+        }
+        head = pop(head);
+        display(head);
 
 
     }
