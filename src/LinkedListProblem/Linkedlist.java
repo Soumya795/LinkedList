@@ -12,6 +12,8 @@ public class Linkedlist {
         }
     }
 
+    public int size;
+
     public Node head = null;
     public Node tail = null;
 
@@ -26,6 +28,39 @@ public class Linkedlist {
             tail.next = newNode;
             tail = newNode;
         }
+
+        size++;
+    }
+
+    public void insertAtMid(int data) {
+
+        Node newNode = new Node(data);
+
+
+        if (head == null) {
+
+            head = newNode;
+            tail = newNode;
+        } else {
+            Node temp, current;
+
+            int count = (size % 2 == 0) ? (size / 2) : ((size + 1) / 2);
+
+            temp = head;
+            current = null;
+
+            for (int i = 0; i < count; i++) {
+                current = temp;
+
+                temp = temp.next;
+            }
+
+            current.next = newNode;
+
+            newNode.next = temp;
+        }
+        size++;
+
     }
 
     public void display() {
@@ -38,8 +73,9 @@ public class Linkedlist {
             System.out.println(current.data + " ");
             current = current.next;
         }
-        System.out.println("null");
+        System.out.println();
     }
+
 
     public void searchNode(int data) {
         Node current = head;
@@ -50,6 +86,7 @@ public class Linkedlist {
             System.out.println("list is empty");
         } else {
             while (current != null) {
+
                 if (current.data == data) {
                     flag = true;
                     break;
@@ -70,12 +107,23 @@ public class Linkedlist {
         System.out.println("Welcome to Linked List:");
 
         s.addNode(56);
-        s.addNode(30);
+
         s.addNode(70);
 
         System.out.println("Original list");
         s.display();
 
+        s.insertAtMid(30);
+        System.out.println("updated list: ");
+        s.display();
+
         s.searchNode(30);
+
+        s.insertAtMid(40);
+        System.out.println("updated list:");
+        s.display();
+
+        s.searchNode(40);
+
     }
 }
