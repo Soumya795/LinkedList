@@ -1,47 +1,81 @@
 package LinkedListProblem;
 
 public class Linkedlist {
-    static class Node {
+    class Node {
         int data;
         Node next;
 
-        Node(int data, Node next) {
+        Node(int data) {
             this.data = data;
-            this.next = next;
+            this.next = null;
+        }
+    }
+
+    public Node head = null;
+    public Node tail = null;
+
+
+    public void addNode(int data) {
+        Node newNode = new Node(data);
+
+        if (head == null) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail.next = newNode;
+            tail = newNode;
         }
     }
 
 
-    static void display(Node head) {
-        Node temp = head;
-        while (temp != null) {
-            System.out.println(temp.data + " ");
-            temp = temp.next;
+    public void display() {
+        Node current = head;
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
         }
-        System.out.println("null");
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
     }
 
-    public static Node pop(Node headRef) {
-        if (headRef == null) {
-            return null;
+    public void pop() {
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
+        } else {
+            if (head != tail) {
+                Node current = head;
+
+                while (current.next != tail) {
+                    current = current.next;
+                }
+
+                tail = current;
+                tail.next = null;
+            } else {
+                head = tail = null;
+            }
         }
-        int result = headRef.data;
-        headRef = headRef.next;
-        System.out.println("the popped node is " + result);
-        return headRef;
     }
 
     public static void main(String[] args) {
+        Linkedlist s = new Linkedlist();
+        System.out.println("Welcome to Linked List:");
 
-        int[] keys = {56, 30, 70};
+        s.addNode(56);
+        s.addNode(30);
+        s.addNode(70);
 
-        Node head = null;
+        System.out.println("Original list");
+        s.display();
 
-        for (int i = keys.length - 1; i >= 0; i--) {
-            head = new Node(keys[i], head);
-        }
-        head = pop(head);
-        display(head);
+
+        s.pop();
+        System.out.println("Updated list");
+        s.display();
 
 
     }
