@@ -1,7 +1,8 @@
 package LinkedListProblem;
 
 public class Linkedlist {
-    class Node {
+
+    static class Node {
         int data;
         Node next;
 
@@ -14,11 +15,11 @@ public class Linkedlist {
     public Node head = null;
     public Node tail = null;
 
-
     public void addNode(int data) {
         Node newNode = new Node(data);
 
         if (head == null) {
+
             head = newNode;
             tail = newNode;
         } else {
@@ -27,41 +28,44 @@ public class Linkedlist {
         }
     }
 
-
     public void display() {
         Node current = head;
         if (head == null) {
-            System.out.println("List is empty.");
+            System.out.println("list is empty.");
             return;
         }
         while (current != null) {
-            System.out.print(current.data + " ");
+            System.out.println(current.data + " ");
             current = current.next;
         }
-        System.out.println();
+        System.out.println("null");
     }
 
-    public void pop() {
+    public void searchNode(int data) {
+        Node current = head;
+        int i = 1;
+        boolean flag = false;
+
         if (head == null) {
-            System.out.println("List is empty.");
-            return;
+            System.out.println("list is empty");
         } else {
-            if (head != tail) {
-                Node current = head;
-
-                while (current.next != tail) {
-                    current = current.next;
+            while (current != null) {
+                if (current.data == data) {
+                    flag = true;
+                    break;
                 }
-
-                tail = current;
-                tail.next = null;
-            } else {
-                head = tail = null;
+                i++;
+                current = current.next;
             }
         }
+        if (flag)
+            System.out.println("Element present in the at the position :" + i);
+        else
+            System.out.print("Element is not present in the list");
     }
 
     public static void main(String[] args) {
+
         Linkedlist s = new Linkedlist();
         System.out.println("Welcome to Linked List:");
 
@@ -72,11 +76,6 @@ public class Linkedlist {
         System.out.println("Original list");
         s.display();
 
-
-        s.pop();
-        System.out.println("Updated list");
-        s.display();
-
-
+        s.searchNode(30);
     }
 }
